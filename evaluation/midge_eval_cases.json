@@ -1,0 +1,615 @@
+[
+  {
+    "id": "route_alias_01",
+    "category": "routing",
+    "command": "Route the kick drum to MIDI channel 4",
+    "required_aliases": [
+      "kick drum"
+    ],
+    "expected": {
+      "action": "route_alias",
+      "alias": "kick drum",
+      "channel": 4
+    }
+  },
+  {
+    "id": "route_alias_02",
+    "category": "routing",
+    "command": "Send snare to channel 6",
+    "required_aliases": [
+      "snare"
+    ],
+    "expected": {
+      "action": "route_alias",
+      "alias": "snare",
+      "channel": 6
+    }
+  },
+  {
+    "id": "route_alias_03",
+    "category": "routing",
+    "command": "Put the tom 3 on channel 9",
+    "required_aliases": [
+      "tom 3"
+    ],
+    "expected": {
+      "action": "route_alias",
+      "alias": "tom 3",
+      "channel": 9
+    }
+  },
+  {
+    "id": "route_group_01",
+    "category": "routing",
+    "command": "Route the toms to MIDI channel 5",
+    "required_groups": [
+      "toms"
+    ],
+    "expected": {
+      "action": "route_group",
+      "group": "toms",
+      "channel": 5
+    }
+  },
+  {
+    "id": "route_source_01",
+    "category": "routing",
+    "command": "Send the keyboard to MIDI channel 2",
+    "required_sources": [
+      "kboard"
+    ],
+    "expected": {
+      "action": "route_source",
+      "source": "kboard",
+      "channel": 2
+    }
+  },
+  {
+    "id": "route_source_02",
+    "category": "routing",
+    "command": "Put the Simmons kit on channel 10",
+    "required_sources": [
+      "simmons"
+    ],
+    "expected": {
+      "action": "route_source",
+      "source": "simmons",
+      "channel": 10
+    }
+  },
+  {
+    "id": "passthrough_01",
+    "category": "routing",
+    "command": "Set the keyboard to passthrough",
+    "required_sources": [
+      "kboard"
+    ],
+    "expected": {
+      "action": "source_passthrough",
+      "source": "kboard"
+    }
+  },
+  {
+    "id": "passthrough_02",
+    "category": "routing",
+    "command": "Let the Simmons use its original channel",
+    "required_sources": [
+      "simmons"
+    ],
+    "expected": {
+      "action": "source_passthrough",
+      "source": "simmons"
+    }
+  },
+  {
+    "id": "mute_01",
+    "category": "mute",
+    "command": "Mute kick drum",
+    "required_aliases": [
+      "kick drum"
+    ],
+    "expected": {
+      "action": "mute_alias",
+      "alias": "kick drum"
+    }
+  },
+  {
+    "id": "mute_02",
+    "category": "mute",
+    "command": "Mute the snare",
+    "required_aliases": [
+      "snare"
+    ],
+    "expected": {
+      "action": "mute_alias",
+      "alias": "snare"
+    }
+  },
+  {
+    "id": "unmute_01",
+    "category": "mute",
+    "command": "Unmute kick drum",
+    "required_aliases": [
+      "kick drum"
+    ],
+    "expected": {
+      "action": "unmute_alias",
+      "alias": "kick drum"
+    }
+  },
+  {
+    "id": "unmute_02",
+    "category": "mute",
+    "command": "Unmute the tom 3",
+    "required_aliases": [
+      "tom 3"
+    ],
+    "expected": {
+      "action": "unmute_alias",
+      "alias": "tom 3"
+    }
+  },
+  {
+    "id": "capture_note_01",
+    "category": "capture",
+    "command": "Capture the next note from the keyboard for kick drum on channel 3",
+    "required_aliases": [
+      "kick drum"
+    ],
+    "required_sources": [
+      "kboard"
+    ],
+    "expected": {
+      "action": "capture_note_trigger",
+      "trigger_alias": "kick drum",
+      "capture_source": "kboard",
+      "channel": 3
+    }
+  },
+  {
+    "id": "capture_note_02",
+    "category": "capture",
+    "command": "Use the next keyboard note for snare on MIDI channel 7",
+    "required_aliases": [
+      "snare"
+    ],
+    "required_sources": [
+      "kboard"
+    ],
+    "expected": {
+      "action": "capture_note_trigger",
+      "trigger_alias": "snare",
+      "capture_source": "kboard",
+      "channel": 7
+    }
+  },
+  {
+    "id": "capture_chord_01",
+    "category": "capture",
+    "command": "Capture the next chord from the keyboard for tom 3 on channel 4",
+    "required_aliases": [
+      "tom 3"
+    ],
+    "required_sources": [
+      "kboard"
+    ],
+    "expected": {
+      "action": "capture_chord_trigger",
+      "trigger_alias": "tom 3",
+      "capture_source": "kboard",
+      "channel": 4
+    }
+  },
+  {
+    "id": "capture_chord_02",
+    "category": "capture",
+    "command": "Make kick drum remember the next chord I play on the keyboard and send it to channel 8",
+    "required_aliases": [
+      "kick drum"
+    ],
+    "required_sources": [
+      "kboard"
+    ],
+    "expected": {
+      "action": "capture_chord_trigger",
+      "trigger_alias": "kick drum",
+      "capture_source": "kboard",
+      "channel": 8
+    }
+  },
+  {
+    "id": "fixed_rule_01",
+    "category": "fixed_rule",
+    "command": "Every fourth kick drum hit, play MIDI note 48 on channel 3",
+    "required_aliases": [
+      "kick drum"
+    ],
+    "expected": {
+      "action": "install_rule",
+      "rule": {
+        "when": {
+          "alias": "kick drum"
+        },
+        "condition": {
+          "every_n": 4
+        },
+        "derive": {
+          "source": "fixed",
+          "notes": [
+            48
+          ]
+        },
+        "output": {
+          "channel": 3
+        }
+      }
+    }
+  },
+  {
+    "id": "fixed_rule_02",
+    "category": "fixed_rule",
+    "command": "Play note 60 on channel 5 every third snare hit",
+    "required_aliases": [
+      "snare"
+    ],
+    "expected": {
+      "action": "install_rule",
+      "rule": {
+        "when": {
+          "alias": "snare"
+        },
+        "condition": {
+          "every_n": 3
+        },
+        "derive": {
+          "source": "fixed",
+          "notes": [
+            60
+          ]
+        },
+        "output": {
+          "channel": 5
+        }
+      }
+    }
+  },
+  {
+    "id": "fixed_rule_03",
+    "category": "fixed_rule",
+    "command": "Every 2nd tom 3 hit should trigger MIDI note 36 on channel 1",
+    "required_aliases": [
+      "tom 3"
+    ],
+    "expected": {
+      "action": "install_rule",
+      "rule": {
+        "when": {
+          "alias": "tom 3"
+        },
+        "condition": {
+          "every_n": 2
+        },
+        "derive": {
+          "source": "fixed",
+          "notes": [
+            36
+          ]
+        },
+        "output": {
+          "channel": 1
+        }
+      }
+    }
+  },
+  {
+    "id": "fixed_rule_04",
+    "category": "fixed_rule",
+    "command": "On every fifth kick drum hit output note 72 to MIDI channel 11",
+    "required_aliases": [
+      "kick drum"
+    ],
+    "expected": {
+      "action": "install_rule",
+      "rule": {
+        "when": {
+          "alias": "kick drum"
+        },
+        "condition": {
+          "every_n": 5
+        },
+        "derive": {
+          "source": "fixed",
+          "notes": [
+            72
+          ]
+        },
+        "output": {
+          "channel": 11
+        }
+      }
+    }
+  },
+  {
+    "id": "dynamic_rule_01",
+    "category": "dynamic_rule",
+    "command": "Every fourth snare hit, play the highest note of the current tom chord one octave up on channel 4",
+    "required_aliases": [
+      "snare"
+    ],
+    "required_groups": [
+      "toms"
+    ],
+    "expected": {
+      "action": "install_rule",
+      "rule": {
+        "when": {
+          "alias": "snare"
+        },
+        "condition": {
+          "every_n": 4
+        },
+        "derive": {
+          "source": "active_chord",
+          "selector_group": "toms",
+          "select": "highest",
+          "transpose": 12
+        },
+        "output": {
+          "channel": 4
+        }
+      }
+    }
+  },
+  {
+    "id": "dynamic_rule_02",
+    "category": "dynamic_rule",
+    "command": "When I hit the kick drum, play the lowest note from the active tom chord two octaves down on channel 6",
+    "required_aliases": [
+      "kick drum"
+    ],
+    "required_groups": [
+      "toms"
+    ],
+    "expected": {
+      "action": "install_rule",
+      "rule": {
+        "when": {
+          "alias": "kick drum"
+        },
+        "derive": {
+          "source": "active_chord",
+          "selector_group": "toms",
+          "select": "lowest",
+          "transpose": -24
+        },
+        "output": {
+          "channel": 6
+        }
+      }
+    }
+  },
+  {
+    "id": "dynamic_rule_03",
+    "category": "dynamic_rule",
+    "command": "Have the snare cycle through notes in the current tom chord on MIDI channel 2",
+    "required_aliases": [
+      "snare"
+    ],
+    "required_groups": [
+      "toms"
+    ],
+    "expected": {
+      "action": "install_rule",
+      "rule": {
+        "when": {
+          "alias": "snare"
+        },
+        "derive": {
+          "source": "active_chord",
+          "selector_group": "toms",
+          "select": "cycle"
+        },
+        "output": {
+          "channel": 2
+        }
+      }
+    }
+  },
+  {
+    "id": "dynamic_rule_04",
+    "category": "dynamic_rule",
+    "command": "Make the tom 3 choose a random note from the active tom chord and transpose it down 12 semitones on channel 9",
+    "required_aliases": [
+      "tom 3"
+    ],
+    "required_groups": [
+      "toms"
+    ],
+    "expected": {
+      "action": "install_rule",
+      "rule": {
+        "when": {
+          "alias": "tom 3"
+        },
+        "derive": {
+          "source": "active_chord",
+          "selector_group": "toms",
+          "select": "random",
+          "transpose": -12
+        },
+        "output": {
+          "channel": 9
+        }
+      }
+    }
+  },
+  {
+    "id": "semantic_route_alias_01",
+    "category": "semantic_paraphrase",
+    "command": "I want the snare coming out of MIDI channel 6",
+    "expected": {
+      "action": "route_alias",
+      "alias": "snare",
+      "channel": 6
+    },
+    "required_aliases": [
+      "snare"
+    ]
+  },
+  {
+    "id": "semantic_route_alias_02",
+    "category": "semantic_paraphrase",
+    "command": "Channel 9 should handle the tom 3",
+    "expected": {
+      "action": "route_alias",
+      "alias": "tom 3",
+      "channel": 9
+    },
+    "required_aliases": [
+      "tom 3"
+    ]
+  },
+  {
+    "id": "semantic_route_group_01",
+    "category": "semantic_paraphrase",
+    "command": "Have all the harmonic pads come through MIDI channel 8",
+    "expected": {
+      "action": "route_group",
+      "group": "harmonic pads",
+      "channel": 8
+    },
+    "required_groups": [
+      "harmonic pads"
+    ]
+  },
+  {
+    "id": "semantic_route_source_01",
+    "category": "semantic_paraphrase",
+    "command": "Whatever comes from the keyboard should leave on channel 4",
+    "expected": {
+      "action": "route_source",
+      "source": "kboard",
+      "channel": 4
+    },
+    "required_sources": [
+      "kboard"
+    ]
+  },
+  {
+    "id": "semantic_passthrough_01",
+    "category": "semantic_paraphrase",
+    "command": "Let the Simmons pass through normally without special routing",
+    "expected": {
+      "action": "source_passthrough",
+      "source": "simmons"
+    },
+    "required_sources": [
+      "simmons"
+    ]
+  },
+  {
+    "id": "semantic_explicit_01",
+    "category": "semantic_paraphrase",
+    "command": "Only let keyboard notes through when I explicitly assign them",
+    "expected": {
+      "action": "source_explicit_only",
+      "source": "kboard"
+    },
+    "required_sources": [
+      "kboard"
+    ]
+  },
+  {
+    "id": "semantic_mute_01",
+    "category": "semantic_paraphrase",
+    "command": "Don't let the hi hat make any sound",
+    "expected": {
+      "action": "mute_alias",
+      "alias": "hi hat"
+    },
+    "required_aliases": [
+      "hi hat"
+    ]
+  },
+  {
+    "id": "semantic_unmute_01",
+    "category": "semantic_paraphrase",
+    "command": "Let the hi hat through again",
+    "expected": {
+      "action": "unmute_alias",
+      "alias": "hi hat"
+    },
+    "required_aliases": [
+      "hi hat"
+    ]
+  },
+  {
+    "id": "semantic_capture_note_01",
+    "category": "semantic_paraphrase",
+    "command": "The next note I play on the keyboard should become the snare note on channel 7",
+    "expected": {
+      "action": "capture_note_trigger",
+      "trigger_alias": "snare",
+      "capture_source": "kboard",
+      "channel": 7
+    },
+    "required_aliases": [
+      "snare"
+    ],
+    "required_sources": [
+      "kboard"
+    ]
+  },
+  {
+    "id": "semantic_fixed_rule_01",
+    "category": "semantic_paraphrase",
+    "command": "On every third snare hit, add MIDI note 60 on channel 5",
+    "expected": {
+      "action": "install_rule",
+      "rule": {
+        "when": {
+          "alias": "snare"
+        },
+        "condition": {
+          "every_n": 3
+        },
+        "derive": {
+          "source": "fixed",
+          "notes": [
+            60
+          ]
+        },
+        "output": {
+          "channel": 5
+        }
+      }
+    },
+    "required_aliases": [
+      "snare"
+    ]
+  },
+  {
+    "id": "semantic_clear_alias_01",
+    "category": "semantic_paraphrase",
+    "command": "Stop forcing the snare onto a specific channel",
+    "expected": {
+      "action": "clear_alias_route",
+      "alias": "snare"
+    },
+    "required_aliases": [
+      "snare"
+    ]
+  },
+  {
+    "id": "semantic_clear_group_01",
+    "category": "semantic_paraphrase",
+    "command": "Remove the MIDI channel assignment from the harmonic pads",
+    "expected": {
+      "action": "clear_group_route",
+      "group": "harmonic pads"
+    },
+    "required_groups": [
+      "harmonic pads"
+    ]
+  }
+]

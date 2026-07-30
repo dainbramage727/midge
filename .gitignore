@@ -1,0 +1,39 @@
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Virtual environments
+venv/
+.venv/
+env/
+midgeenv/
+
+# Local model files
+*.gguf
+*.safetensors
+models/
+
+# Runtime state and logs
+midge_state.json
+*.log
+
+# Temporary and backup files
+*.backup
+*.pre_v3
+*.pre_parser_refactor
+*.before_v2_1
+*.bad_v3
+*~
+~$*
+
+# Archives and large media
+*.zip
+*.MOV
+*.mov
+*.mp4
+
+# macOS and editors
+.DS_Store
+.vscode/
+.idea/

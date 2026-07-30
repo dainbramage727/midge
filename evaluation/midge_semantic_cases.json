@@ -1,0 +1,171 @@
+[
+  {
+    "id": "semantic_route_alias_01",
+    "category": "semantic_paraphrase",
+    "command": "I want the snare coming out of MIDI channel 6",
+    "expected": {
+      "action": "route_alias",
+      "alias": "snare",
+      "channel": 6
+    },
+    "required_aliases": [
+      "snare"
+    ]
+  },
+  {
+    "id": "semantic_route_alias_02",
+    "category": "semantic_paraphrase",
+    "command": "Channel 9 should handle the tom 3",
+    "expected": {
+      "action": "route_alias",
+      "alias": "tom 3",
+      "channel": 9
+    },
+    "required_aliases": [
+      "tom 3"
+    ]
+  },
+  {
+    "id": "semantic_route_group_01",
+    "category": "semantic_paraphrase",
+    "command": "Have all the harmonic pads come through MIDI channel 8",
+    "expected": {
+      "action": "route_group",
+      "group": "harmonic pads",
+      "channel": 8
+    },
+    "required_groups": [
+      "harmonic pads"
+    ]
+  },
+  {
+    "id": "semantic_route_source_01",
+    "category": "semantic_paraphrase",
+    "command": "Whatever comes from the keyboard should leave on channel 4",
+    "expected": {
+      "action": "route_source",
+      "source": "kboard",
+      "channel": 4
+    },
+    "required_sources": [
+      "kboard"
+    ]
+  },
+  {
+    "id": "semantic_passthrough_01",
+    "category": "semantic_paraphrase",
+    "command": "Let the Simmons pass through normally without special routing",
+    "expected": {
+      "action": "source_passthrough",
+      "source": "simmons"
+    },
+    "required_sources": [
+      "simmons"
+    ]
+  },
+  {
+    "id": "semantic_explicit_01",
+    "category": "semantic_paraphrase",
+    "command": "Only let keyboard notes through when I explicitly assign them",
+    "expected": {
+      "action": "source_explicit_only",
+      "source": "kboard"
+    },
+    "required_sources": [
+      "kboard"
+    ]
+  },
+  {
+    "id": "semantic_mute_01",
+    "category": "semantic_paraphrase",
+    "command": "Don't let the hi hat make any sound",
+    "expected": {
+      "action": "mute_alias",
+      "alias": "hi hat"
+    },
+    "required_aliases": [
+      "hi hat"
+    ]
+  },
+  {
+    "id": "semantic_unmute_01",
+    "category": "semantic_paraphrase",
+    "command": "Let the hi hat through again",
+    "expected": {
+      "action": "unmute_alias",
+      "alias": "hi hat"
+    },
+    "required_aliases": [
+      "hi hat"
+    ]
+  },
+  {
+    "id": "semantic_capture_note_01",
+    "category": "semantic_paraphrase",
+    "command": "The next note I play on the keyboard should become the snare note on channel 7",
+    "expected": {
+      "action": "capture_note_trigger",
+      "trigger_alias": "snare",
+      "capture_source": "kboard",
+      "channel": 7
+    },
+    "required_aliases": [
+      "snare"
+    ],
+    "required_sources": [
+      "kboard"
+    ]
+  },
+  {
+    "id": "semantic_fixed_rule_01",
+    "category": "semantic_paraphrase",
+    "command": "On every third snare hit, add MIDI note 60 on channel 5",
+    "expected": {
+      "action": "install_rule",
+      "rule": {
+        "when": {
+          "alias": "snare"
+        },
+        "condition": {
+          "every_n": 3
+        },
+        "derive": {
+          "source": "fixed",
+          "notes": [
+            60
+          ]
+        },
+        "output": {
+          "channel": 5
+        }
+      }
+    },
+    "required_aliases": [
+      "snare"
+    ]
+  },
+  {
+    "id": "semantic_clear_alias_01",
+    "category": "semantic_paraphrase",
+    "command": "Stop forcing the snare onto a specific channel",
+    "expected": {
+      "action": "clear_alias_route",
+      "alias": "snare"
+    },
+    "required_aliases": [
+      "snare"
+    ]
+  },
+  {
+    "id": "semantic_clear_group_01",
+    "category": "semantic_paraphrase",
+    "command": "Remove the MIDI channel assignment from the harmonic pads",
+    "expected": {
+      "action": "clear_group_route",
+      "group": "harmonic pads"
+    },
+    "required_groups": [
+      "harmonic pads"
+    ]
+  }
+]
