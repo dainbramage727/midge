@@ -284,6 +284,12 @@ Planned extensions include:
 - Multi-agent musical workflows
 - Adaptive performer profiles
 
+## Fine-tuning Dataset
+
+The repository now includes a reproducible 640-example train/validation/test corpus plus a separate 48-case gold benchmark. Targets use Midge's production JSON action contract and are checked by the same validators used at runtime. See [`data/README.md`](data/README.md) for the schema, leakage policy, limitations, SFT export, and base-vs-LoRA evaluation protocol.
+
+The configurable Slurm-oriented LoRA/QLoRA harness and experiment protocol are documented in [`experiments/README.md`](experiments/README.md) and [`EXPERIMENT_PLAN.md`](EXPERIMENT_PLAN.md).
+
 ---
 
 # Project Status

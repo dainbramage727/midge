@@ -1,0 +1,24 @@
+#!/bin/bash
+# Copy this file and add only cluster values verified with UCF ARCC.
+#SBATCH --job-name=midge-eval
+# VERIFY BEFORE USE: partition, account/allocation, GPU request syntax/type,
+# time limit, memory, CPU count, modules, and log destination.
+##SBATCH --partition=<VERIFIED_PARTITION>
+##SBATCH --account=<VERIFIED_ALLOCATION>
+##SBATCH --gres=<VERIFIED_GPU_REQUEST>
+##SBATCH --time=<VERIFIED_LIMIT>
+##SBATCH --output=<VERIFIED_LOG_PATH>/midge-eval-%j.out
+
+set -euo pipefail
+: "${MIDGE_REPO:?Set MIDGE_REPO to the checked-out repository path}"
+: "${CONFIG_PATH:?Set CONFIG_PATH to a reviewed TOML configuration}"
+: "${PYTHON_BIN:?Set PYTHON_BIN to the verified environment Python executable}"
+: "${EVAL_SPLIT:?Set EVAL_SPLIT to validation, test, or gold}"
+: "${EVAL_LABEL:?Set EVAL_LABEL to base or lora}"
+cd "$MIDGE_REPO"
+adapter_args=()
+if [[ "$EVAL_LABEL" == "lora" ]]; then
+  : "${ADAPTER_PATH:?Set ADAPTER_PATH for LoRA evaluation}"
+  adapter_args=(--adapter "$ADAPTER_PATH")
+fi
+"$PYTHON_BIN" -m experiments.midge_experiments.evaluate --config "$CONFIG_PATH" --split "$EVAL_SPLIT" --label "$EVAL_LABEL" "${adapter_args[@]}"

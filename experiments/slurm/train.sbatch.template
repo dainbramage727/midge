@@ -1,0 +1,24 @@
+#!/bin/bash
+# Copy this file and add only values verified from UCF ARCC documentation or staff.
+# Do not submit the template unchanged.
+#SBATCH --job-name=midge-train
+# VERIFY BEFORE USE: partition, account/allocation, GPU request syntax/type,
+# time limit, memory, CPU count, module initialization, and log destination.
+# Example placeholders (uncomment only after verification):
+##SBATCH --partition=<VERIFIED_PARTITION>
+##SBATCH --account=<VERIFIED_ALLOCATION>
+##SBATCH --gres=<VERIFIED_GPU_REQUEST>
+##SBATCH --time=<VERIFIED_LIMIT>
+##SBATCH --output=<VERIFIED_LOG_PATH>/midge-train-%j.out
+
+set -euo pipefail
+: "${MIDGE_REPO:?Set MIDGE_REPO to the checked-out repository path}"
+: "${CONFIG_PATH:?Set CONFIG_PATH to a reviewed TOML configuration}"
+: "${PYTHON_BIN:?Set PYTHON_BIN to the verified environment Python executable}"
+cd "$MIDGE_REPO"
+"$PYTHON_BIN" tools/validate_dataset.py
+resume_args=()
+if [[ -n "${RESUME_FROM_CHECKPOINT:-}" ]]; then
+  resume_args=(--resume-from-checkpoint "$RESUME_FROM_CHECKPOINT")
+fi
+"$PYTHON_BIN" -m experiments.midge_experiments.train --config "$CONFIG_PATH" "${resume_args[@]}"
