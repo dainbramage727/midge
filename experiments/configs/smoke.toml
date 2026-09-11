@@ -1,0 +1,57 @@
+[experiment]
+name = "midge-smoke"
+output_root = "/tmp/midge-smoke-runs"
+smoke_test = true
+
+[model]
+name_or_path = "SMOKE_NO_MODEL_LOADED"
+revision = "not-applicable"
+trust_remote_code = false
+
+[data]
+train = "data/splits/train.jsonl"
+validation = "data/splits/validation.jsonl"
+test = "data/splits/test.jsonl"
+gold = "data/gold_benchmark.jsonl"
+contexts = "data/contexts.json"
+stats = "data/dataset_stats.json"
+
+[training]
+learning_rate = 0.0002
+epochs = 1
+per_device_batch_size = 1
+eval_batch_size = 1
+gradient_accumulation_steps = 1
+max_sequence_length = 256
+seed = 5636
+save_steps = 1
+eval_steps = 1
+logging_steps = 1
+save_total_limit = 1
+gradient_checkpointing = false
+bf16 = false
+fp16 = false
+packing = false
+report_to = []
+
+[lora]
+enabled = true
+rank = 4
+alpha = 8
+dropout = 0.0
+bias = "none"
+target_modules = ["q_proj", "v_proj"]
+
+[quantization]
+enabled = false
+bits = 4
+compute_dtype = "float16"
+quant_type = "nf4"
+double_quant = true
+
+[generation]
+max_new_tokens = 32
+do_sample = false
+temperature = 0.0
+top_p = 1.0
+num_beams = 1

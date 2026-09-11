@@ -1,0 +1,12 @@
+# Create and archive an exact lock with: pip freeze > environment/requirements-lock.txt
+torch>=2.2
+transformers>=4.46
+datasets>=3.0
+accelerate>=1.0
+peft>=0.13
+trl>=0.12
+bitsandbytes>=0.44; platform_system == "Linux"
+safetensors>=0.4
+sentencepiece>=0.2
+requests>=2.31
+mido>=1.3

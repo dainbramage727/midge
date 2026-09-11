@@ -1,0 +1,59 @@
+[experiment]
+name = "midge-qlora-v01"
+output_root = "runs"
+smoke_test = false
+
+[model]
+# Replace with any compatible Hugging Face causal/instruction model and pin a revision SHA before a real run.
+name_or_path = "Qwen/Qwen2.5-1.5B-Instruct"
+revision = "VERIFY_AND_PIN_MODEL_COMMIT_SHA"
+trust_remote_code = false
+
+[data]
+train = "data/splits/train.jsonl"
+validation = "data/splits/validation.jsonl"
+test = "data/splits/test.jsonl"
+gold = "data/gold_benchmark.jsonl"
+contexts = "data/contexts.json"
+stats = "data/dataset_stats.json"
+
+[training]
+learning_rate = 0.0002
+epochs = 3
+per_device_batch_size = 2
+eval_batch_size = 2
+gradient_accumulation_steps = 8
+max_sequence_length = 1024
+seed = 5636
+save_steps = 25
+eval_steps = 25
+logging_steps = 5
+save_total_limit = 3
+gradient_checkpointing = true
+bf16 = true
+fp16 = false
+packing = false
+report_to = []
+
+[lora]
+enabled = true
+rank = 16
+alpha = 32
+dropout = 0.05
+bias = "none"
+# Architecture-dependent: verify these module names on the selected model before submission.
+target_modules = ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+
+[quantization]
+enabled = true
+bits = 4
+compute_dtype = "bfloat16"
+quant_type = "nf4"
+double_quant = true
+
+[generation]
+max_new_tokens = 512
+do_sample = false
+temperature = 0.0
+top_p = 1.0
+num_beams = 1
