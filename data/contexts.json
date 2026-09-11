@@ -1,0 +1,267 @@
+{
+  "contexts": {
+    "default": {
+      "aliases": {
+        "clap": {
+          "channel": 10,
+          "note": 46,
+          "source": "simmons"
+        },
+        "closed hi hat": {
+          "channel": 10,
+          "note": 38,
+          "source": "simmons"
+        },
+        "cowbell": {
+          "channel": 10,
+          "note": 47,
+          "source": "simmons"
+        },
+        "crash": {
+          "channel": 10,
+          "note": 41,
+          "source": "simmons"
+        },
+        "kick drum": {
+          "channel": 10,
+          "note": 36,
+          "source": "simmons"
+        },
+        "open hi hat": {
+          "channel": 10,
+          "note": 39,
+          "source": "simmons"
+        },
+        "ride": {
+          "channel": 10,
+          "note": 40,
+          "source": "simmons"
+        },
+        "rim": {
+          "channel": 10,
+          "note": 45,
+          "source": "simmons"
+        },
+        "snare": {
+          "channel": 10,
+          "note": 37,
+          "source": "simmons"
+        },
+        "tom 1": {
+          "channel": 10,
+          "note": 42,
+          "source": "simmons"
+        },
+        "tom 2": {
+          "channel": 10,
+          "note": 43,
+          "source": "simmons"
+        },
+        "tom 3": {
+          "channel": 10,
+          "note": 44,
+          "source": "simmons"
+        }
+      },
+      "groups": {
+        "accents": [
+          "rim",
+          "clap",
+          "cowbell"
+        ],
+        "cymbals": [
+          "closed hi hat",
+          "open hi hat",
+          "ride",
+          "crash"
+        ],
+        "drums": [
+          "kick drum",
+          "snare",
+          "tom 1",
+          "tom 2",
+          "tom 3"
+        ],
+        "toms": [
+          "tom 1",
+          "tom 2",
+          "tom 3"
+        ]
+      },
+      "rule_order": [],
+      "rules": {}
+    },
+    "rules_loaded": {
+      "aliases": {
+        "clap": {
+          "channel": 10,
+          "note": 46,
+          "source": "simmons"
+        },
+        "closed hi hat": {
+          "channel": 10,
+          "note": 38,
+          "source": "simmons"
+        },
+        "cowbell": {
+          "channel": 10,
+          "note": 47,
+          "source": "simmons"
+        },
+        "crash": {
+          "channel": 10,
+          "note": 41,
+          "source": "simmons"
+        },
+        "kick drum": {
+          "channel": 10,
+          "note": 36,
+          "source": "simmons"
+        },
+        "open hi hat": {
+          "channel": 10,
+          "note": 39,
+          "source": "simmons"
+        },
+        "ride": {
+          "channel": 10,
+          "note": 40,
+          "source": "simmons"
+        },
+        "rim": {
+          "channel": 10,
+          "note": 45,
+          "source": "simmons"
+        },
+        "snare": {
+          "channel": 10,
+          "note": 37,
+          "source": "simmons"
+        },
+        "tom 1": {
+          "channel": 10,
+          "note": 42,
+          "source": "simmons"
+        },
+        "tom 2": {
+          "channel": 10,
+          "note": 43,
+          "source": "simmons"
+        },
+        "tom 3": {
+          "channel": 10,
+          "note": 44,
+          "source": "simmons"
+        }
+      },
+      "groups": {
+        "accents": [
+          "rim",
+          "clap",
+          "cowbell"
+        ],
+        "cymbals": [
+          "closed hi hat",
+          "open hi hat",
+          "ride",
+          "crash"
+        ],
+        "drums": [
+          "kick drum",
+          "snare",
+          "tom 1",
+          "tom 2",
+          "tom 3"
+        ],
+        "toms": [
+          "tom 1",
+          "tom 2",
+          "tom 3"
+        ]
+      },
+      "rule_order": [
+        "snare-chord-accent",
+        "kick-pulse",
+        "tom-echo"
+      ],
+      "rules": {
+        "kick-pulse": {
+          "condition": {},
+          "continue": false,
+          "derive": {
+            "select": "first",
+            "source": "input_note",
+            "transpose": 0
+          },
+          "enabled": true,
+          "id": "kick-pulse",
+          "name": "kick pulse",
+          "output": {
+            "channel": 4,
+            "suppress_original": true,
+            "type": "note",
+            "velocity": "input"
+          },
+          "priority": 100,
+          "state_updates": [],
+          "when": {
+            "alias": "kick drum",
+            "event": "note_on"
+          }
+        },
+        "snare-chord-accent": {
+          "condition": {},
+          "continue": false,
+          "derive": {
+            "select": "first",
+            "source": "input_note",
+            "transpose": 0
+          },
+          "enabled": true,
+          "id": "snare-chord-accent",
+          "name": "snare chord accent",
+          "output": {
+            "channel": 4,
+            "suppress_original": true,
+            "type": "note",
+            "velocity": "input"
+          },
+          "priority": 100,
+          "state_updates": [],
+          "when": {
+            "alias": "snare",
+            "event": "note_on"
+          }
+        },
+        "tom-echo": {
+          "condition": {},
+          "continue": false,
+          "derive": {
+            "select": "first",
+            "source": "input_note",
+            "transpose": 0
+          },
+          "enabled": true,
+          "id": "tom-echo",
+          "name": "tom echo",
+          "output": {
+            "channel": 4,
+            "suppress_original": true,
+            "type": "note",
+            "velocity": "input"
+          },
+          "priority": 100,
+          "state_updates": [],
+          "when": {
+            "alias": "tom 1",
+            "event": "note_on"
+          }
+        }
+      }
+    }
+  },
+  "sources": [
+    "kboard",
+    "simmons"
+  ]
+}
